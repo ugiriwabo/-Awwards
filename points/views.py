@@ -38,3 +38,18 @@ def past_days_news(request, past_date):
         return redirect(news_of_day)
 
     return render(request, 'all-news/past-news.html', {"date": date})
+
+@login_required(login_url='/accounts/login/')
+def my_profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return redirect('view_profile')
+
+    else:
+        form = ProfileForm()
+    return render(request, 'profile.html', {"form": form})

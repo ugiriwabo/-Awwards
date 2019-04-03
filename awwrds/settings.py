@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tinymce',
     'bootstrap3',
     'points.apps.PointsConfig',
     'django.contrib.admin',

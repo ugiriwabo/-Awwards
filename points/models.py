@@ -1,5 +1,5 @@
 from django.db import models
-# from tinymce.models import HTMLField
+from tinymce.models import HTMLField
 from django.contrib.auth.models import User
 
 class Image(models.Model):
