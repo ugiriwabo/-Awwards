@@ -17,9 +17,7 @@ class Image(models.Model):
 
     @classmethod
     def get_image(cls,id):
-        Image.objects.all()
-
-    
+        Image.objects.all()   
 
 class Profile(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
