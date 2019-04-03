@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 import datetime as dt
 from django.contrib.auth.decorators import login_required
+from .forms import ProfileForm
+from .models import Profile,Image
 
 @login_required(login_url='/accounts/login/')
 def welcome(request):
