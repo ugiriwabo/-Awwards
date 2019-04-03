@@ -3,4 +3,8 @@
 {% block content %}
     {{block.super}}
     <h1> <center><strong><u>Welcome to the awwards</u></strong></center> </h1>
+    <center>
+        <h3><strong>{{profile.bio}}</strong></h3>
+        <img src="{{profile.profile_photo.url}}" class="img-circle" width="304" height="236">
+    </center>
 {% endblock %}

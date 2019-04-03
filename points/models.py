@@ -2,13 +2,13 @@ from django.db import models
 from tinymce.models import HTMLField
 from django.contrib.auth.models import User
 
-class Image(models.Model):
+class Project(models.Model):
     image=models.ImageField(upload_to = 'images/')
-    name = models.CharField(max_length =30)
-    caption = models.TextField(max_length =120)
+    title = models.CharField(max_length =30)
+    description=models.TextField(max_length =300)
     post_date = models.DateTimeField(auto_now=True)
-    likes = models.BooleanField(default=False)
-
+    url=models.CharField(max_length =100)
+    
     def __str__(self):
         return self.name
         

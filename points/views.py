@@ -3,11 +3,14 @@ from django.http  import HttpResponse,Http404
 import datetime as dt
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
-from .models import Profile,Image
+from .models import Profile,Project
 
 @login_required(login_url='/accounts/login/')
 def welcome(request):
-    return render(request,'welcome.html')
+    current_user=request.user
+    profile=Profile.objects.get(user=current_user.id)
+    images=Profile.get_profile(profile.user_id)
+    return render(request,'welcome.html',{'profile':profile,'images':images})
 
 def news_of_day(request):
     date = dt.date.today()
@@ -57,9 +60,14 @@ def my_profile(request):
     return render(request, 'profile.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
-def view_profile(request):
-    current_user=request.user
-    profile=Profile.objects.get(user=current_user.id)
-    images=Profile.get_profile(profile.user_id)
+def search_results(request):
+    if 'user' in request.GET and request.GET["bio"]:
+        search_term = request.GET.get("user")
+        searched_users = Image.search_by_user(search_term)
+        message = f"{search_term}"
 
-    return render(request,'my_profile.html',{'profile':profile,'images':images})
+        return render(request, 'search.html',{"message":message,"users": searched_users})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
