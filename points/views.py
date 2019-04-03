@@ -50,8 +50,16 @@ def my_profile(request):
             profile = form.save(commit=False)
             profile.user = current_user
             profile.save()
-        return redirect('view_profile')
+        return redirect('welcome')
 
     else:
         form = ProfileForm()
     return render(request, 'profile.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def view_profile(request):
+    current_user=request.user
+    profile=Profile.objects.get(user=current_user.id)
+    images=Profile.get_profile(profile.user_id)
+
+    return render(request,'my_profile.html',{'profile':profile,'images':images})
