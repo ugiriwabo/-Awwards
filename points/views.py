@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 import datetime as dt
+from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
+@login_required(login_url='/accounts/login/')
 def welcome(request):
-    return render(request, 'welcome.html')
+    return render(request,'welcome.html')
 
 def news_of_day(request):
     date = dt.date.today()
