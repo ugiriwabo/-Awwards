@@ -8,5 +8,5 @@ class ProfileForm(forms.ModelForm):
         
 class UploadProjectForm(forms.ModelForm):
     class Meta:
-        model = Image
+        model = Project
         exclude = ['post_date']

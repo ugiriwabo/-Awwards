@@ -2,15 +2,16 @@ from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 import datetime as dt
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
+from .forms import ProfileForm,UploadProjectForm
 from .models import Profile,Project
 
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     current_user=request.user
     profile=Profile.objects.get(user=current_user.id)
+    img = Project.objects.all()
     images=Profile.get_profile(profile.user_id)
-    return render(request,'welcome.html',{'profile':profile,'images':images})
+    return render(request,'welcome.html',{'profile':profile,'images':images,'img':img})
 
 def news_of_day(request):
     date = dt.date.today()
@@ -60,14 +61,16 @@ def my_profile(request):
     return render(request, 'profile.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
-def search_results(request):
-    if 'user' in request.GET and request.GET["bio"]:
-        search_term = request.GET.get("user")
-        searched_users = Image.search_by_user(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"users": searched_users})
+def upload_project(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form = UploadProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('welcome')
 
     else:
-        message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})
+        form = UploadProjectForm()
+    return render(request, 'project.html', {"form": form})
