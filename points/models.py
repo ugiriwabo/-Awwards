@@ -17,7 +17,12 @@ class Project(models.Model):
 
     @classmethod
     def get_image(cls,id):
-        Image.objects.all()   
+        Image.objects.all()
+
+    @classmethod
+    def search_title(cls,search_term):
+        titles=Project.objects.filter(title__icontains=search_term)
+        return titles
 
 class Profile(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)

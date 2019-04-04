@@ -9,7 +9,7 @@ urlpatterns=[
     url(r'^archives/(\d{4}-\d{2}-\d{2})/$',views.past_days_news,name = 'pastNews'),
     url(r'^profile/', views.my_profile, name='profile'),
     url(r'^upload_project', views.upload_project, name='upload_project'),
-    url(r'^search', views.search_user, name='search'),
+    url(r'^search', views.search_project_title, name='search'),
     
 ]
 if settings.DEBUG:

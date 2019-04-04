@@ -76,13 +76,13 @@ def upload_project(request):
     return render(request, 'project.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
-def search_user(request):
-    if 'image' in request.GET and request.GET["image"]:
-        search_term = request.GET.get("image")
-        users = Image.search_user(search_term)
+def search_project_title(request):
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET.get("title")
+        titles = Project.search_title(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search.html',{"message":message,"users":users})
+        return render(request, 'search.html',{"message":message,"titles":titles})
 
     else:
         message = "You haven't searched for any term"

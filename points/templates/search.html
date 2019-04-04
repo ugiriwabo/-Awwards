@@ -12,10 +12,10 @@
   </div>
 
   <div class="row">
-      {% if users %}
-      {% for names in users %}
+      {% if titles %}
+      {% for names in titles %}
         <div class="col-sm-6 col-md-3">
-            <h1>{{names.name}}</h1>
+            <h1>{{names.title}}</h1>
             <img src="{{names.image.url}}">
         </div>
       {% endfor %}
