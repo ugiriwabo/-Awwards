@@ -3,14 +3,10 @@
 {% block content %}
     {{block.super}}
     <h1> <center><strong><u>Welcome to the awwards</u></strong></center> </h1>
-    <center>
-        <h3><strong>{{profile.bio}}</strong></h3>
-        <img src="{{profile.profile_photo.url}}" class="img-circle" width="304" height="236">
-    </center>
     {%for x in img%}
     <div class="col-md-4">
         <div class="thumbnail" style="background-color:gainsboro; width:350px; height: 280px;">
-            <a style="text-align: center" href="{%url 'welcome'%}"><center><strong>{{x.title}}</strong></center></a>
+            <!-- <a style="text-align: center" href="{%url 'welcome'%}"><center><strong>{{x.title}}</strong></center></a> -->
             <img style="width:200; height:160;"  class="img-thumbnail" src="{{x.image.url}}">
         </div>
     </div>
