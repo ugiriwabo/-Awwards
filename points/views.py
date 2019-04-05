@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer
 from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 
 @login_required(login_url='/accounts/login/')
@@ -110,5 +111,5 @@ class ProjectList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
     
-    from rest_framework import status
