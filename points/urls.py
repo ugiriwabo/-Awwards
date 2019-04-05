@@ -3,6 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns=[
     url('^$',views.welcome,name = 'welcome'),
     url('^today/$',views.news_of_day,name='newsToday'),
@@ -11,6 +12,8 @@ urlpatterns=[
     url(r'^view_profile', views.view_profile, name='view_profile'),
     url(r'^upload_project', views.upload_project, name='upload_project'),
     url(r'^search', views.search_project_title, name='search'),
+    url(r'^api/project/$', views.ProjectList.as_view()),
+    
     
 ]
 if settings.DEBUG:

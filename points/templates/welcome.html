@@ -3,11 +3,12 @@
 {% block content %}
     {{block.super}}
     <h1> <center><strong><u>Welcome to the awwards</u></strong></center> </h1>
+    
     {%for x in img%}
     <div class="col-md-4">
         <div class="thumbnail" style="background-color:gainsboro; width:350px; height: 280px;">
             <!-- <a style="text-align: center" href="{%url 'welcome'%}"><center><strong>{{x.title}}</strong></center></a> -->
-            <img style="width:200; height:160;"  class="img-thumbnail" src="{{x.image.url}}">
+            <img style="margin-top: 40px; margin-bottom: 40px; width:250; height:200;"  class="img-thumbnail" src="{{x.image.url}}">
         </div>
     </div>
     {%endfor%}
